@@ -18,7 +18,7 @@ function operate(num1, num2, operator) {
     return operator(num1, num2);
 };
 
-const displayInput = document.querySelector('input');
+const displayInput = document.getElementById('displayId');
 const numButtons = document.querySelectorAll('.numbers');
 const operateButtons = document.querySelectorAll('.operators');
 
@@ -36,13 +36,16 @@ operateButtons.forEach((button) => {
     button.addEventListener('click', () => {
         switch (buttonInnerHTML) {
             case '+' :
-                calcMemory.number1 = displayInput.value;
-                calcMemory.operator = 'add';
-                
+                calcMemory.number1 = parseInt(displayInput.value);
+                calcMemory.operator = add;
+                displayInput.value = "";
+            break;
+            case '=' :
+                calcMemory.number2 = parseInt(displayInput.value);
                 console.log(calcMemory);
+                displayInput.value = operate(calcMemory.number1, calcMemory.number2, calcMemory.operator);
             break;
         };
     });
 });
-
 
