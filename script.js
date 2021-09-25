@@ -22,14 +22,14 @@ const displayInput = document.getElementById('displayId');
 const numButtons = document.querySelectorAll('.numbers');
 const operateButtons = document.querySelectorAll('.operators');
 
+let calcMemory = {};
+
 numButtons.forEach((button) => {
     let buttonInnerHTML = button.innerHTML;
     button.addEventListener('click', () => {
         displayInput.value += buttonInnerHTML;
     });
 });
-
-let calcMemory = {};
 
 operateButtons.forEach((button) => {
     let buttonInnerHTML = button.innerHTML;
@@ -38,14 +38,26 @@ operateButtons.forEach((button) => {
             case '+' :
                 calcMemory.number1 = parseInt(displayInput.value);
                 calcMemory.operator = add;
-                displayInput.value = "";
             break;
+            case '-' :
+                calcMemory.number1 = parseInt(displayInput.value);
+                calcMemory.operator = subtract;
+            break;
+            case '/' :
+                calcMemory.number1 = parseInt(displayInput.value);
+                calcMemory.operator = divide;
+            break;
+            case '*' :
+                calcMemory.number1 = parseInt(displayInput.value);
+                calcMemory.operator = multiply;
             case '=' :
                 calcMemory.number2 = parseInt(displayInput.value);
                 console.log(calcMemory);
                 displayInput.value = operate(calcMemory.number1, calcMemory.number2, calcMemory.operator);
             break;
+            case 'AC' :
+                displayInput.value = "";
+            break;
         };
     });
 });
-
