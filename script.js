@@ -18,46 +18,33 @@ function operate(num1, num2, operator) {
     return operator(num1, num2);
 };
 
-const displayInput = document.getElementById('displayId');
-const numButtons = document.querySelectorAll('.numbers');
-const operateButtons = document.querySelectorAll('.operators');
+calcMemory = {};
 
-let calcMemory = {};
+const calcDisplay = document.querySelector('h1');
 
-numButtons.forEach((button) => {
-    let buttonInnerHTML = button.innerHTML;
-    button.addEventListener('click', () => {
-        displayInput.value += buttonInnerHTML;
-    });
+const nineButton = document.querySelector('.nine');
+const eightButton = document.querySelector('.eight');
+
+nineButton.addEventListener('click', () => {
+    calcDisplay.textContent += 9;
 });
 
-operateButtons.forEach((button) => {
-    let buttonInnerHTML = button.innerHTML;
-    button.addEventListener('click', () => {
-        switch (buttonInnerHTML) {
-            case '+' :
-                calcMemory.number1 = parseInt(displayInput.value);
-                calcMemory.operator = add;
-            break;
-            case '-' :
-                calcMemory.number1 = parseInt(displayInput.value);
-                calcMemory.operator = subtract;
-            break;
-            case '/' :
-                calcMemory.number1 = parseInt(displayInput.value);
-                calcMemory.operator = divide;
-            break;
-            case '*' :
-                calcMemory.number1 = parseInt(displayInput.value);
-                calcMemory.operator = multiply;
-            case '=' :
-                calcMemory.number2 = parseInt(displayInput.value);
-                console.log(calcMemory);
-                displayInput.value = operate(calcMemory.number1, calcMemory.number2, calcMemory.operator);
-            break;
-            case 'AC' :
-                displayInput.value = "";
-            break;
-        };
-    });
+eightButton.addEventListener('click', () => {
+    calcDisplay.textContent += 8;
 });
+
+const plusButton = document.querySelector('.plus');
+const equalsButton = document.querySelector('.equals');
+
+plusButton.addEventListener('click', () => {
+    calcMemory.num1 = parseInt(calcDisplay.textContent);
+    calcMemory.operator = add;
+    calcDisplay.textContent = "";
+});
+
+equalsButton.addEventListener('click', () => {
+    calcMemory.num2 = parseInt(calcDisplay.textContent);
+    console.log(calcMemory);
+    calcDisplay.textContent = operate(calcMemory.num1, calcMemory.num2, calcMemory.operator);
+});
+
