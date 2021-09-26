@@ -25,6 +25,7 @@ const operateButtons = document.querySelectorAll('.operators');
 let calcMemory = {};
 
 let clicked = false;
+let timesClicked = 0;
 
 numButtons.forEach((button) => {
     let buttonInnerHTML = button.innerHTML;
@@ -44,9 +45,17 @@ operateButtons.forEach((button) => {
     button.addEventListener('click', () => {
         switch (buttonInnerHTML) {
             case '+' :
-                calcMemory.number1 = parseFloat(displayInput.value);
+                if (timesClicked < 1) {
+                    calcMemory.number1 = parseFloat(displayInput.value);
+                };
                 calcMemory.operator = add;
                 clicked = true;
+                timesClicked++;
+
+                if (timesClicked > 1) {
+                    displayInput.value = operate(calcMemory.number1, calcMemory.number2, calcMemory.operator);
+                    calcMemory.number1 = parseFloat(displayInput.value);
+                };
             break;
             case '-' :
                 calcMemory.number1 = parseFloat(displayInput.value);
@@ -62,15 +71,18 @@ operateButtons.forEach((button) => {
                 calcMemory.number1 = parseFloat(displayInput.value);
                 calcMemory.operator = multiply;
                 clicked = true;
-                break;
+            break;
             case '=' :
                 console.log(calcMemory);
                 displayInput.value = operate(calcMemory.number1, calcMemory.number2, calcMemory.operator);
                 clicked = true;
+                timesClicked = 0;
+                console.log(timesClicked);
             break;
             case 'AC' :
                 displayInput.value = "";
                 calcMemory = {};
+                timesClicked = 0;
             break;
         };
     });
