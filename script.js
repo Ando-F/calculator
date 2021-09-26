@@ -40,44 +40,44 @@ numButtons.forEach((button) => {
     });
 });
 
+function calculation() {
+    if (timesClicked < 1) {
+        calcMemory.number1 = parseFloat(displayInput.value);
+    };
+
+    clicked = true;
+    timesClicked++;
+
+    if (timesClicked > 1) {
+        displayInput.value = operate(calcMemory.number1, calcMemory.number2, calcMemory.operator);
+        calcMemory.number1 = parseFloat(displayInput.value);
+    };
+};
+
 operateButtons.forEach((button) => {
     let buttonInnerHTML = button.innerHTML;
     button.addEventListener('click', () => {
         switch (buttonInnerHTML) {
             case '+' :
-                if (timesClicked < 1) {
-                    calcMemory.number1 = parseFloat(displayInput.value);
-                };
+                calculation();
                 calcMemory.operator = add;
-                clicked = true;
-                timesClicked++;
-
-                if (timesClicked > 1) {
-                    displayInput.value = operate(calcMemory.number1, calcMemory.number2, calcMemory.operator);
-                    calcMemory.number1 = parseFloat(displayInput.value);
-                };
             break;
             case '-' :
-                calcMemory.number1 = parseFloat(displayInput.value);
+                calculation();
                 calcMemory.operator = subtract;
-                clicked = true;
             break;
             case '/' :
-                calcMemory.number1 = parseFloat(displayInput.value);
+                calculation();
                 calcMemory.operator = divide;
-                clicked = true;
             break;
             case '*' :
-                calcMemory.number1 = parseFloat(displayInput.value);
+                calculation();
                 calcMemory.operator = multiply;
-                clicked = true;
             break;
             case '=' :
-                console.log(calcMemory);
                 displayInput.value = operate(calcMemory.number1, calcMemory.number2, calcMemory.operator);
                 clicked = true;
                 timesClicked = 0;
-                console.log(timesClicked);
             break;
             case 'AC' :
                 displayInput.value = "";
