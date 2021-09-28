@@ -22,6 +22,7 @@ const displayInput = document.getElementById('displayId');
 const numButtons = document.querySelectorAll('.numbers');
 const operateButtons = document.querySelectorAll('.operators');
 const handlersButtons = document.querySelectorAll('.handlers');
+const dotButton = document.querySelector('.dot');
 
 let calcMemory = {
     num1: "",
@@ -38,6 +39,10 @@ numButtons.forEach((button) => {
         if (calcMemory.operator == "") {
             calcMemory.num1 += buttonInnerHTML;
             displayInput.value = calcMemory.num1;    
+
+            if (displayInput.value.includes('.')) {
+                dotButton.disabled = true;
+            };
         };
 
         // Если в памяти нет оператора, то очистить дисплей, сохранить 
@@ -46,7 +51,11 @@ numButtons.forEach((button) => {
             displayInput.value = "";
             calcMemory.num2 += buttonInnerHTML;
             displayInput.value = calcMemory.num2;
-            console.log(calcMemory);
+
+            dotButton.disabled = false;
+            if (displayInput.value.includes('.')) {
+                dotButton.disabled = true;
+            };
         };
     });
 });
@@ -68,7 +77,6 @@ operateButtons.forEach((button) => {
                 };
 
                 calcMemory.operator = add;
-                console.log(calcMemory);
             break;
             case '-': 
                 // Если в памяти сохранены оператор и второе число, то при нажатии на
@@ -121,12 +129,14 @@ handlersButtons.forEach((button) => {
                     num2: "",
                     operator: ""
                 };
+                dotButton.disabled = false;
             break;
             case '=':
                 calcMemory.num1 = operate(calcMemory.num1, calcMemory.num2, calcMemory.operator);
                 displayInput.value = calcMemory.num1;
                 calcMemory.operator = "";
                 calcMemory.num2 = "";
+                dotButton.disabled = false;
             break;
         };
     });

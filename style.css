@@ -14,34 +14,38 @@ html, body {
     flex-wrap: wrap;
     justify-content: center;
     padding: 10px 0;
-    width: 180px;
+    width: 200px;
     background-color: #CEE5D0;
+    margin: 0;
 }
 
 .buttons {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    width: 160px;
-    border: 0.2px solid;
+    justify-content: flex-start;
+    width: 166px;
+    gap: 2px;
 }
 
 button {
     width: 40px;
     height: 40px;
     border-radius: 0;
-    border: 0.2px solid;
+    border: 0;
     font-size: 18px;
     background-color: #F3F0D7;
 }
 
+button:active {
+    background-color: #FAEEE0;
+    transform: translateY(4px);
+  }
+
 input {
-    width: 155px;
+    width: 162px;
     height: 40px;
     margin-bottom: 10px;
-    border: 2px solid;
-    border-color: black;
-    border-radius: 5px;
+    border: 0;
     font-size: 20px;
     color: black;
     background-color: #F3F0D7;
